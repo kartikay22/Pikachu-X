@@ -24,8 +24,7 @@ Best User Bot To Manage Your Telegram Account
 
 ## GET STRING SESSION FROM REPL RUN 
 
-## [![Get String Session online(https://replit.com/@ErichDaniken/Generate-Telegram-String-Session)
-
+[![Repl.it](https://github.com/kartikay22/Pikachu-X-ylaye&theme=midnight-purple)](https://replit.com/@ErichDaniken/Generate-Telegram-String-Session)
 
 ### The Simple Way
 
