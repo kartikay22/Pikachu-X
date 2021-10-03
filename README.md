@@ -1,5 +1,7 @@
 # Pikachu-X
 
+#Project Closed!!
+
 ## Use Repo At Your Own Risk...
 ![Enterprise](https://telegra.ph/)
 
@@ -22,7 +24,7 @@ Best User Bot To Manage Your Telegram Account
 
 ## GET STRING SESSION FROM REPL RUN 
 
-## [![Get String Session online](https://repl.it/badge/github/Crackexy/StringSession)](https://stringsession.crackexy.repl.run/)
+## [![Get String Session online(https://replit.com/@ErichDaniken/Generate-Telegram-String-Session)
 
 
 ### The Simple Way
