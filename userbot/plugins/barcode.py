@@ -4,15 +4,16 @@ By @snappy101
 """
 
 import asyncio
-import barcode
 import os
-import time
-from barcode.writer import ImageWriter
 from datetime import datetime
-from uniborg.util import admin_cmd
+
+import barcode
+from barcode.writer import ImageWriter
+
+from uniborg.util import lightning_cmd
 
 
-@borg.on(admin_cmd(pattern="barcode ?(.*)"))
+@borg.on(lightning_cmd(pattern="barcode ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -61,3 +62,13 @@ async def _(event):
     await event.edit("Created BarCode in {} seconds".format(ms))
     await asyncio.sleep(5)
     await event.delete()
+
+
+from userbot import CMD_HELP
+CMD_HELP.update(
+    {
+     "| | barcode | |": "`.barcode`\
+\n\nBarCode Generator\
+\n\n**Command** -  `.barcode` `(your text)``"
+    }
+)

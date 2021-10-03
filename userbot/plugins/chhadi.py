@@ -1,11 +1,10 @@
-# Lots of lub to @r4v4n4 for gibing the base <3
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from userbot.utils import lightning_cmd
+from uniborg.util import lightning_cmd
 
 
-@borg.on(lightning_cmd("scan ?(.*)", allow_sudo=True))
+@borg.on(lightning_cmd("dm ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -14,18 +13,18 @@ async def _(event):
         return
     reply_message = await event.get_reply_message()
     if not reply_message.media:
-        await event.edit("```reply to a media message```")
+        await event.edit("```reply to media```")
         return
-    chat = "@DrWebBot"
+    chat = "@image_deepfrybot"
     reply_message.sender
     if reply_message.sender.bot:
         await event.edit("```Reply to actual users message.```")
         return
-    await event.edit(" `Sliding my tip, of fingers over it`")
+    await event.edit("```Processing```")
     async with borg.conversation(chat) as conv:
         try:
             response = conv.wait_event(
-                events.NewMessage(incoming=True, from_users=161163358)
+                events.NewMessage(incoming=True, from_users=432858024)
             )
             await borg.forward_messages(chat, reply_message)
             response = await response
@@ -37,14 +36,4 @@ async def _(event):
                 "```can you kindly disable your forward privacy settings for good?```"
             )
         else:
-            if response.text.startswith("Select"):
-                await event.edit("`Please go to` @DrWebBot `and select your language.`")
-            else:
-                await event.edit(
-                    f"**Antivirus scan was completed. I got dem final results.**\n {response.message.message}"
-                )
-
-
-from userbot import CMD_HELP
-
-CMD_HELP.update({"antivirus": ".waifu : Reply To User Message To Scan Him/Her"})
+            await event.edit(f"{response.message}")

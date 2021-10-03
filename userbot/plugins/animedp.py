@@ -1,6 +1,8 @@
+# Made By  Keep Credits If You Are Goanna Kang This Lol
+
 # And Thanks To The Creator Of Autopic This Script Was Made from Snippets From That Script
 
-# Usage .avengersdp Im Not Responsible For Any Ban caused By This
+# Usage .actressdp Im Not Responsible For Any Ban caused By This
 
 import asyncio
 import os
@@ -12,14 +14,14 @@ import requests
 from telethon.tl import functions
 
 from userbot.utils import lightning_cmd
-from userbot import CMD_HELP
 
 COLLECTION_STRING = [
-    "avengers-logo-wallpaper",
-    "avengers-hd-wallpapers-1080p",
-    "avengers-iphone-wallpaper",
-    "iron-man-wallpaper-1920x1080",
-    "iron-man-wallpapers",
+    "pokemon-serena-wallpaper",
+    "hd-pokemon-iphone-wallpapers",
+    "pokemon-wallpaper-pikachu",
+    "doraemon-3d-wallpaper-2018",
+    "pokemon-serena-wallpaper",
+    "anime-girls-wallpapers",
 ]
 
 
@@ -51,11 +53,11 @@ async def animepp():
     urllib.request.urlretrieve(fy, "donottouch.jpg")
 
 
-@borg.on(lightning_cmd(pattern="avengersdp ?(.*)"))
+@borg.on(lightning_cmd(pattern="animedp ?(.*)"))
 async def main(event):
 
     await event.edit(
-        "**Starting Avengers Profile Pic...\n\nDone !!! Check Your DP By @blacklightningot**"
+        "**Starting Anime Profile Pic...\n\nDone !!! Check Your DP..by Black Lighhtning🏻**"
     )
 
     while True:
@@ -68,10 +70,16 @@ async def main(event):
 
         os.system("rm -rf donottouch.jpg")
 
-        await asyncio.sleep(1000)  # Edit this to your required needs
+        await asyncio.sleep(600)  # Edit this to your required needs
 
 
 
-CMD_HELP.update( {
-    ".avengersdp": "**USAGE** Auto Avangers Profile Pic ."
-})
+from userbot import CMD_HELP
+
+CMD_HELP.update(
+    {
+     "animedp": "`.animedp`\
+     \n**USAGE**: Simultaneous Anime DPs"
+     
+    }
+)

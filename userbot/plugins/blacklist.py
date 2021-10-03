@@ -6,12 +6,14 @@ Available Commands:
 .addblacklist
 .listblacklist
 .rmblacklist"""
-import asyncio
+import io
 import re
+
+from telethon import events
+
 import userbot.plugins.sql_helper.blacklist_sql as sql
-from telethon import events, utils
-from telethon.tl import types, functions
-from userbot.utils import admin_cmd
+from userbot.Config import Var
+from userbot.utils import lightning_cmd
 
 
 @borg.on(events.NewMessage(incoming=True))
@@ -24,22 +26,28 @@ async def on_new_message(event):
         if re.search(pattern, name, flags=re.IGNORECASE):
             try:
                 await event.delete()
-            except Exception as e:
+            except Exception:
                 await event.reply("I do not have DELETE permission in this chat")
                 sql.rm_from_blacklist(event.chat_id, snip.lower())
             break
 
 
-@borg.on(admin_cmd("addblacklist ((.|\n)*)"))
+@borg.on(lightning_cmd("addblacklist ((.|\n)*)"))
 async def on_add_black_list(event):
     text = event.pattern_match.group(1)
-    to_blacklist = list(set(trigger.strip() for trigger in text.split("\n") if trigger.strip()))
+    to_blacklist = list(
+        set(trigger.strip() for trigger in text.split("\n") if trigger.strip())
+    )
     for trigger in to_blacklist:
         sql.add_to_blacklist(event.chat_id, trigger.lower())
-    await event.edit("Added {} triggers to the blacklist in the current chat".format(len(to_blacklist)))
+    await event.edit(
+        "Added {} triggers to the blacklist in the current chat".format(
+            len(to_blacklist)
+        )
+    )
 
 
-@borg.on(admin_cmd("listblacklist"))
+@borg.on(lightning_cmd("listblacklist"))
 async def on_view_blacklist(event):
     all_blacklisted = sql.get_chat_blacklist(event.chat_id)
     OUT_STR = "Blacklists in the Current Chat:\n"
@@ -48,7 +56,7 @@ async def on_view_blacklist(event):
             OUT_STR += f"👉 {trigger} \n"
     else:
         OUT_STR = "No BlackLists. Start Saving using `.addblacklist`"
-    if len(OUT_STR) > Config.MAX_MESSAGE_SIZE_LIMIT:
+    if len(OUT_STR) > Var.MAX_MESSAGE_SIZE_LIMIT:
         with io.BytesIO(str.encode(OUT_STR)) as out_file:
             out_file.name = "blacklist.text"
             await borg.send_file(
@@ -57,19 +65,39 @@ async def on_view_blacklist(event):
                 force_document=True,
                 allow_cache=False,
                 caption="BlackLists in the Current Chat",
-                reply_to=event
+                reply_to=event,
             )
             await event.delete()
     else:
         await event.edit(OUT_STR)
 
 
-@borg.on(admin_cmd("rmblacklist ((.|\n)*)"))
+@borg.on(lightning_cmd("rmblacklist ((.|\n)*)"))
 async def on_delete_blacklist(event):
     text = event.pattern_match.group(1)
-    to_unblacklist = list(set(trigger.strip() for trigger in text.split("\n") if trigger.strip()))
+    to_unblacklist = list(
+        set(trigger.strip() for trigger in text.split("\n") if trigger.strip())
+    )
     successful = 0
     for trigger in to_unblacklist:
         if sql.rm_from_blacklist(event.chat_id, trigger.lower()):
             successful += 1
     await event.edit(f"Removed {successful} / {len(to_unblacklist)} from the blacklist")
+
+
+
+from userbot import CMD_HELP
+CMD_HELP.update(
+    {
+     "Available Commands": 
+     
+     "\n\n**Command**- `.addblacklist` `(username)`\
+     \n\n**USAGE** - `Adds The Username in black lists in that chat  group`\
+     \n\n**Command** - listblacklist\
+     \n**USAGE** - `Lists The Users Who You Black Listed`\
+     \n\n**COMMAND** - `.rmblacklist` (`username`)\
+     \n**USAGE** - `Removes The User From Black List`"
+    }
+
+
+)
