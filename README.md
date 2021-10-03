@@ -15,13 +15,6 @@ Best User Bot To Manage Your Telegram Account
 ### For any query or to know how it works join Group And Channel 
 
 
-## Credits
-[PIKACHU-THE-USERBOT](https://github.com/THESANSKARILADKA/PIKACHU-THE-USERBOT)
-
-
-
-
-
 ## Installing Heroku 
 
 ### The Easy Way
