@@ -1,7 +1,7 @@
 {
  "name": "Pikachu-X 🇮🇳 UserBot",
  "description": "An advanced Telethon Userbot, from @Kartikay_bhasin",
- "logo": "https://telegra.ph/file/73373552e9217e010e853.jpg",
+ "logo": "",
  "keywords": [
   "telegram",
   "userbot",
@@ -10,8 +10,8 @@
   "productivity"
  ],
  "repository": "https://github.com/kartikay22/Pikachu-X",
- "website": "https://kaal0408.gitbook.io/Lucifer/",
- "success_url": "https://t.me/LuciferXsupport",
+ "website": "",
+ "success_url": "",
  "stack": "container",
  "env": {
   "ENV": {
